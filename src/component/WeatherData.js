@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useHistory, useParams } from 'react-router-dom';
+import {  useParams } from 'react-router-dom';
 import List from "../Layout/List";
 const apikey = process.env.REACT_APP_WEATHER_API;
 const WeatherData = () => {
@@ -17,15 +17,15 @@ const WeatherData = () => {
       );
       const data = await res.json();
       setWeather(data);
-      console.log(data, apikey);
+      
     }
   }, []);
-  if (!weather) return <div />;
+  if (!weather) return <div><h1>Loading</h1></div>;
   return (
     <div className="row">
     <h1 className="text-center">{weather.name}</h1>
      <ul className="list-group">
-  <List q={"wind Speed"} s={(weather.wind.speed)+" km"} />
+  <List q={"wind Speed"} s={weather.wind.speed+" km"} />
   <List q={"Sun Rise"} s={new Date(weather.sys.sunrise).toTimeString()} />
   <List q={"feels_like"} s={weather.main.feels_like}/>
   <List q={"Humidity"} s={weather.main.humidity}/>
